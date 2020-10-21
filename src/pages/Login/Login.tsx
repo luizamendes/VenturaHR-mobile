@@ -40,7 +40,7 @@ export const Login = () => {
       <Button
         text="Criar conta"
         kind="secondary"
-        onPress={handleRequestLogin}
+        onPress={() => navigation.navigate("Register")}
       />
     </View>
   );

@@ -36,7 +36,7 @@ export const Home = () => {
         <Button
           text="Crie nova conta"
           kind="secondary"
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => navigation.navigate("Register")}
         />
       </View>
     </ScrollView>
