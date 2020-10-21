@@ -2,7 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { Home } from "./pages/Home";
+import { Dashboard } from "./pages/Dashboard";
 import { Login } from "./pages/Login";
 
 const { Navigator, Screen } = createStackNavigator();
@@ -12,12 +12,12 @@ export const Routes = () => {
     <NavigationContainer>
       <Navigator
         screenOptions={{
-          headerShown: false,
+          headerShown: true,
           cardStyle: { backgroundColor: "#f2f3f5" },
         }}
       >
-        {/* <Screen name="Home" component={Home} /> */}
         <Screen name="Login" component={Login} />
+        <Screen name="Dashboard" component={Dashboard} />
       </Navigator>
     </NavigationContainer>
   );

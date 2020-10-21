@@ -1,8 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  container: {},
   button: {
+    marginTop: 8,
+    marginBottom: 8,
     borderRadius: 5,
     padding: 16,
     justifyContent: "center",

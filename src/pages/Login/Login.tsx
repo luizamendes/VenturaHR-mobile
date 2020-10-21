@@ -3,15 +3,29 @@ import { View, Text, TextInput } from "react-native";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { styles } from "./styles";
+import { requestLogin } from "../../api/login";
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigation = useNavigation();
 
-  const handleRequestLogin = () => {
-    const user = { email, password };
+  const handleRequestLogin = async () => {
+    if (!email || !password) {
+      return;
+    }
 
-    console.log("handleRequestLogin -> user", user);
+    try {
+      const { data } = await requestLogin(email, password);
+      const { user: loggedUser, token } = data;
+      await AsyncStorage.setItem("tkn", token);
+      navigation.navigate("Dashboard");
+    } catch (error) {
+      console.log(error.message);
+      //
+    }
   };
 
   return (
@@ -19,6 +33,11 @@ export const Login = () => {
       <Input label="E-mail" value={email} onChangeText={setEmail} />
       <Input label="Senha" value={password} onChangeText={setPassword} />
       <Button text="Login" onPress={handleRequestLogin} />
+      <Button
+        text="Criar conta"
+        kind="secondary"
+        onPress={handleRequestLogin}
+      />
     </View>
   );
 };
