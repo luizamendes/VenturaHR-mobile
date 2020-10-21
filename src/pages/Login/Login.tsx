@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, TextInput } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-community/async-storage";
+import { requestLogin } from "../../api/login";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { styles } from "./styles";
-import { requestLogin } from "../../api/login";
-import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-community/async-storage";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -30,9 +30,13 @@ export const Login = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.cta}>
+        Faça login, tenha acesso a diversas vagas e encontre seu próximo
+        emprego!
+      </Text>
       <Input label="E-mail" value={email} onChangeText={setEmail} />
       <Input label="Senha" value={password} onChangeText={setPassword} />
-      <Button text="Login" onPress={handleRequestLogin} />
+      <Button text="Entrar" onPress={handleRequestLogin} />
       <Button
         text="Criar conta"
         kind="secondary"

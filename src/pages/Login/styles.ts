@@ -4,6 +4,13 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: "center",
+    marginTop: 30,
+    // justifyContent: "center",
+  },
+  cta: {
+    fontSize: 25,
+    marginBottom: 50,
+    lineHeight: 32,
+    paddingRight: 20,
   },
 });

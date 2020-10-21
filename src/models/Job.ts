@@ -4,4 +4,7 @@ export interface Job {
   description: string;
   city: string;
   company: string;
+  openUntil: string;
+  updatedAt: string;
+  createdAt: string;
 }
