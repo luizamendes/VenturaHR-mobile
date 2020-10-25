@@ -1,3 +1,5 @@
+import { Criteria } from "./Criteria";
+
 export interface Job {
   id: number;
   name: string;
@@ -7,4 +9,5 @@ export interface Job {
   openUntil: string;
   updatedAt: string;
   createdAt: string;
+  criteriaList: Array<Criteria>;
 }

@@ -28,13 +28,12 @@ const getPrivateClient = () => {
 
   client.interceptors.response.use(
     (response) => response,
-    (error) => {
+    async (error) => {
       const httpStatus = error.response ? error.response.status : null;
 
       if (httpStatus === 401) {
-        window.localStorage.removeItem("user");
-        window.localStorage.removeItem("tkn");
-        window.location.replace("/");
+        await AsyncStorage.removeItem("tkn");
+        await AsyncStorage.removeItem("user");
       }
 
       return Promise.reject(error);

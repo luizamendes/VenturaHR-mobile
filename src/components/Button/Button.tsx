@@ -11,7 +11,7 @@ interface ButtonProps {
 
 export const Button = ({ text, onPress, kind }: ButtonProps) => {
   const buttonStyles = () => {
-    if (kind === "secondary") {
+    if (kind?.toLowerCase() === "secondary") {
       return [styles.button, styles.buttonSecondary];
     } else {
       return [styles.button, styles.buttonPrimary];
