@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { requestLogin } from "../../api/login";
@@ -29,7 +29,7 @@ export const Login = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.cta}>
         Faça login, tenha acesso a diversas vagas e encontre seu próximo
         emprego!
@@ -42,6 +42,6 @@ export const Login = () => {
         kind="secondary"
         onPress={() => navigation.navigate("Register")}
       />
-    </View>
+    </ScrollView>
   );
 };
