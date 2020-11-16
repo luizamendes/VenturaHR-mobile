@@ -20,7 +20,7 @@ export const JobList = ({ title, jobs }: JobListProps) => {
         <TouchableOpacity
           style={styles.jobRow}
           key={job.id}
-          onPress={() => navigation.navigate("JobDetails", { id: job.id })}
+          onPress={() => navigation.navigate("Job Details", { id: job.id })}
         >
           <Text>{job.name}</Text>
           <Text>{job.company}</Text>

@@ -1,7 +1,7 @@
 import { useRoute } from "@react-navigation/native";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
-import { ActivityIndicator, Text, ScrollView, View } from "react-native";
+import { Text, ScrollView, View } from "react-native";
 import { Picker } from "@react-native-community/picker";
 import { fetchJobById } from "../../api/job";
 import { Button } from "../../components/Button";
@@ -42,20 +42,27 @@ export const JobDetails = () => {
 
   const handleApplication = async () => {
     try {
-      console.log("handleApplication -> application", application);
-      console.log(
-        "handleApplication -> application",
-        JSON.stringify(application)
-      );
+      const processedApplication = application.map((criteria) => {
+        criteria.weight = +criteria.weight;
+        criteria.profile = +criteria.profile;
+        criteria.applicantAnswer ? +criteria.applicantAnswer : undefined;
 
-      await apply({ answers: JSON.stringify(application) }, id);
+        return criteria;
+      });
+
+      await apply({ answers: JSON.stringify(processedApplication) }, id);
     } catch (error) {
+      console.log("handleApplication -> error", error);
       //
     }
   };
 
   if (!job) {
-    return <ActivityIndicator size="large" />;
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
   }
 
   return (
@@ -84,37 +91,55 @@ export const JobDetails = () => {
           {moment(job.openUntil).format("DD/MM/YYYY")}
         </Text>
       </View>
-      <Button text="Quero me candidatar" onPress={() => setIsApplying(true)} />
-      {isApplying && (
-        <View style={styles.criteria}>
-          <Text style={styles.label}>Critérios analisados</Text>
-          <Text style={styles.criteriaSubtitle}>
-            Preencha os critérios da vaga de acordo com sua experiência
-          </Text>
-          {application.map((criteria, index) => {
-            return (
-              <View key={criteria.id}>
-                <Text>
-                  <Text style={styles.criteriaName}>{criteria.name}: </Text>
-                  {criteria.description}
-                </Text>
-                <Picker
-                  selectedValue={application[index].applicantAnswer}
-                  onValueChange={(itemValue) =>
-                    handleSaveAnswer(itemValue, index)
-                  }
-                >
-                  <Picker.Item label="0 a 1 ano" value="1" />
-                  <Picker.Item label="mais de 1 e menos de 4 anos" value="2" />
-                  <Picker.Item label="mais de 4 e menos de 7 anos" value="3" />
-                  <Picker.Item label="mais de 7 e menos de 10 anos" value="4" />
-                  <Picker.Item label="mais de 10 anos" value="5" />
-                </Picker>
-              </View>
-            );
-          })}
-          <Button text="Enviar" onPress={handleApplication} />
-        </View>
+      {false ? (
+        <Text>Você já se candidatou a esta vaga</Text>
+      ) : (
+        <>
+          <Button
+            text="Quero me candidatar"
+            onPress={() => setIsApplying(true)}
+          />
+          {isApplying && (
+            <View style={styles.criteria}>
+              <Text style={styles.label}>Critérios analisados</Text>
+              <Text style={styles.criteriaSubtitle}>
+                Preencha os critérios da vaga de acordo com sua experiência
+              </Text>
+              {application.map((criteria, index) => {
+                return (
+                  <View key={criteria.id}>
+                    <Text>
+                      <Text style={styles.criteriaName}>{criteria.name}: </Text>
+                      {criteria.description}
+                    </Text>
+                    <Picker
+                      selectedValue={application[index].applicantAnswer}
+                      onValueChange={(itemValue) =>
+                        handleSaveAnswer(itemValue, index)
+                      }
+                    >
+                      <Picker.Item label="0 a 1 ano" value="1" />
+                      <Picker.Item
+                        label="mais de 1 e menos de 4 anos"
+                        value="2"
+                      />
+                      <Picker.Item
+                        label="mais de 4 e menos de 7 anos"
+                        value="3"
+                      />
+                      <Picker.Item
+                        label="mais de 7 e menos de 10 anos"
+                        value="4"
+                      />
+                      <Picker.Item label="mais de 10 anos" value="5" />
+                    </Picker>
+                  </View>
+                );
+              })}
+              <Button text="Enviar" onPress={handleApplication} />
+            </View>
+          )}
+        </>
       )}
       <Button text="Indicar vaga" kind="secondary" onPress={() => {}} />
     </ScrollView>

@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 
 const getDefaultClient = () =>
   axios.create({
-    baseURL: "http://192.168.1.96:5000",
+    baseURL: "http://192.168.1.66:5000",
     headers: { "Content-Type": "application/json" },
   });
 
