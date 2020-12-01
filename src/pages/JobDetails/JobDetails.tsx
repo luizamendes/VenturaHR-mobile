@@ -9,6 +9,7 @@ import { Job } from "../../models/Job";
 import { styles } from "./styles";
 import { Criteria } from "../../models/Criteria";
 import { apply } from "../../api/candidate";
+import { useNavigation } from "@react-navigation/native";
 
 interface JobDetailsRouteParams {
   id: number;
@@ -19,6 +20,7 @@ export const JobDetails = () => {
   const [job, setJob] = useState<Job>();
   const [application, setApplication] = useState<Criteria[]>([]);
   const [isApplying, setIsApplying] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetch = async () => {
@@ -51,6 +53,7 @@ export const JobDetails = () => {
       });
 
       await apply({ answers: JSON.stringify(processedApplication) }, id);
+      navigation.navigate("Minhas Candidaturas");
     } catch (error) {
       console.log("handleApplication -> error", error);
       //

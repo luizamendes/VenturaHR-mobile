@@ -18,4 +18,14 @@ export interface Application {
   userId: number;
   jobId: number;
   application: ApplicationApplication;
+  createdAt: string;
+}
+
+export interface Answer {
+  id: number;
+  name: string;
+  description: string;
+  profile: number;
+  weight: number;
+  applicantAnswer: string;
 }

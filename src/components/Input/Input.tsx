@@ -4,13 +4,18 @@ import { styles } from "./styles";
 
 interface InputProps {
   label?: string;
+  password?: boolean;
 }
 
-export const Input = ({ label, ...props }: InputProps & TextInputProps) => {
+export const Input = ({
+  label,
+  password,
+  ...props
+}: InputProps & TextInputProps) => {
   return (
     <View style={styles.container}>
       {label && <Text style={styles.label}>{label}</Text>}
-      <TextInput {...props} style={styles.input} />
+      <TextInput secureTextEntry={!!password} {...props} style={styles.input} />
     </View>
   );
 };

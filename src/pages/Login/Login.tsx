@@ -35,7 +35,12 @@ export const Login = () => {
         emprego!
       </Text>
       <Input label="E-mail" value={email} onChangeText={setEmail} />
-      <Input label="Senha" value={password} onChangeText={setPassword} />
+      <Input
+        password
+        label="Senha"
+        value={password}
+        onChangeText={setPassword}
+      />
       <Button text="Entrar" onPress={handleRequestLogin} />
       <Button
         text="Criar conta"

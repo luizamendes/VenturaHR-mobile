@@ -8,6 +8,7 @@ import { Home } from "./pages/Home";
 import { Register } from "./pages/Register";
 import { JobDetails } from "./pages/JobDetails";
 import { MyApplications } from "./pages/MyApplications";
+import { ApplicationDetails } from "./pages/ApplicationDetails";
 import { Header } from "./components/Header";
 
 const { Navigator, Screen } = createStackNavigator();
@@ -34,6 +35,7 @@ export const Routes = () => {
         <Screen name="Register" component={Register} />
         <Screen name="Job Details" component={JobDetails} />
         <Screen name="Minhas Candidaturas" component={MyApplications} />
+        <Screen name="Candidatura" component={ApplicationDetails} />
       </Navigator>
     </NavigationContainer>
   );
